@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_shared_ratings",
+  "info": {
+    "displayName": "Rating"
+  },
+  "options": {},
+  "attributes": {
+    "low": {
+      "type": "text"
+    },
+    "medium": {
+      "type": "text"
+    },
+    "high": {
+      "type": "text"
+    }
+  }
+}

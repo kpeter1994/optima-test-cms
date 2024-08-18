@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_form_scales",
+  "info": {
+    "displayName": "scale",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "category": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "question": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.question"
+    },
+    "rating": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.rating"
+    }
+  }
+}
