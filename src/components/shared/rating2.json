@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_rating2s",
+  "info": {
+    "displayName": "Rating2"
+  },
+  "options": {},
+  "attributes": {
+    "border": {
+      "type": "integer"
+    },
+    "text": {
+      "type": "text"
+    }
+  }
+}

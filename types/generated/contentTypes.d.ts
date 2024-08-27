@@ -400,6 +400,7 @@ export interface ApiTestTest extends Schema.CollectionType {
     singularName: 'test';
     pluralName: 'tests';
     displayName: 'Test';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -407,12 +408,53 @@ export interface ApiTestTest extends Schema.CollectionType {
   attributes: {
     title: Attribute.String;
     element: Attribute.DynamicZone<['form.scale']>;
+    text: Attribute.String;
+    slug: Attribute.UID<'api::test.test', 'title'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::test.test', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::test.test', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTestResultTestResult extends Schema.CollectionType {
+  collectionName: 'test_results';
+  info: {
+    singularName: 'test-result';
+    pluralName: 'test-results';
+    displayName: 'TestResult';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    results: Attribute.JSON;
+    textResults: Attribute.Text;
+    user_email: Attribute.String;
+    title: Attribute.String;
+    owner: Attribute.Relation<
+      'api::test-result.test-result',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::test-result.test-result',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::test-result.test-result',
+      'oneToOne',
+      'admin::user'
+    > &
       Attribute.Private;
   };
 }
@@ -870,6 +912,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    test_results: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::test-result.test-result'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -899,6 +946,7 @@ declare module '@strapi/types' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::registered.registered': ApiRegisteredRegistered;
       'api::test.test': ApiTestTest;
+      'api::test-result.test-result': ApiTestResultTestResult;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;

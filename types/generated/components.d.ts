@@ -1,5 +1,16 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface SharedRating2 extends Schema.Component {
+  collectionName: 'components_shared_rating2s';
+  info: {
+    displayName: 'Rating2';
+  };
+  attributes: {
+    border: Attribute.Integer;
+    text: Attribute.Text;
+  };
+}
+
 export interface SharedRating extends Schema.Component {
   collectionName: 'components_shared_ratings';
   info: {
@@ -36,12 +47,14 @@ export interface FormScale extends Schema.Component {
     title: Attribute.String;
     question: Attribute.Component<'shared.question', true>;
     rating: Attribute.Component<'shared.rating'>;
+    rating2: Attribute.Component<'shared.rating2', true>;
   };
 }
 
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'shared.rating2': SharedRating2;
       'shared.rating': SharedRating;
       'shared.question': SharedQuestion;
       'form.scale': FormScale;
